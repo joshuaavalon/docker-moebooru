@@ -1,4 +1,4 @@
-FROM ruby:2-slim
+FROM ruby:2
 
 ENV RAILS_ENVIRONMENT=production
 
