@@ -6,21 +6,27 @@ RUN echo "deb http://ftp.debian.org/debian jessie-backports main" > /etc/apt/sou
 
 RUN apt-get update -y && apt-get upgrade -y
 
-RUN apt-get install -y gcc g++ imagemagick jhead libxslt-dev libyaml-dev git libssl-dev \
-    libpq-dev libreadline-dev libmagic-dev \
-    gnash-tools \
-    postgresql-client \
-    rsync \
-    ffmpeg
+RUN apt-get install -y libpq-dev \
+      libxml2-dev \
+      libxslt-dev \
+      mercurial \
+      jhead \
+      libgd2-noxpm-dev \
+      libmagic-dev \
+      imagemagick \
+      # dependecy for coffee-rails
+      nodejs \
+      # ruby calls run_cmd on psql
+      postgresql-client
 
 COPY moebooru /moebooru
 COPY database.yml /moebooru/config/database.yml
 COPY local_config.rb /moebooru/config/local_config.rb
+COPY run.sh /moebooru/run.sh
+COPY wait-for-it/wait-for-it.sh /moebooru/wait-for-it.sh
 
 WORKDIR /moebooru
 
-RUN bundle install && \
-    bundle exec rake db:reset && \
-    bundle exec rake db:migrate
+RUN bundle install
 
-ENTRYPOINT ["bundle", "exec", "unicorn"]
+ENTRYPOINT ["sh", "run.sh"]

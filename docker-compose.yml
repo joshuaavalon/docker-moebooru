@@ -12,7 +12,7 @@ services:
       - default
       - backend
     volumes:
-      - /docker/moebooru/data:/moebooru
+      - /docker/moebooru/data:/data
     depends_on:
       - postgres
       - memcached
@@ -22,7 +22,7 @@ services:
       - POSTGRES_USER=moebooru
       - POSTGRES_PASSWORD=moebooru
     volumes:
-      - /docker/szurubooru/database:/var/lib/postgresql/data
+      - /docker/moebooru/database:/var/lib/postgresql/data
     networks:
       - backend
   memcached:
