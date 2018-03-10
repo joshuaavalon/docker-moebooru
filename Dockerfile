@@ -27,6 +27,4 @@ COPY wait-for-it/wait-for-it.sh /moebooru/wait-for-it.sh
 
 WORKDIR /moebooru
 
-RUN bundle install
-
 ENTRYPOINT ["sh", "run.sh"]
