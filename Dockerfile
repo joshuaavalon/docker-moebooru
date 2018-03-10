@@ -23,7 +23,6 @@ COPY moebooru /moebooru
 COPY database.yml /moebooru/config/database.yml
 COPY local_config.rb /moebooru/config/local_config.rb
 COPY run.sh /moebooru/run.sh
-COPY wait-for-it/wait-for-it.sh /moebooru/wait-for-it.sh
 
 WORKDIR /moebooru
 

@@ -1,4 +1,3 @@
-sh wait-for-it.sh postgresql:5432
 if [ ! -d /data/app ]; then
     echo "Cannot find server folder in /data. Initialize moebooru."
     bundle install
