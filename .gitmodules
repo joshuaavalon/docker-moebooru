@@ -1,0 +1,3 @@
+[submodule "moebooru"]
+	path = moebooru
+	url = https://github.com/moebooru/moebooru.git

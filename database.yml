@@ -1,0 +1,19 @@
+# Copy this to "database.yml" and adjust the fields accordingly.
+# Only works with postgresql adapter.
+login: &login
+  adapter: postgresql
+  username: moebooru
+  password: moebooru
+  host: postgres
+
+development:
+  database: moebooru_dev
+  <<: *login
+
+test:
+  database: moebooru_test
+  <<: *login
+
+production:
+  database: moebooru
+  <<: *login

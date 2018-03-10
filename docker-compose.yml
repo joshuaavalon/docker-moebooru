@@ -1,0 +1,35 @@
+version: "3"
+services:
+  moebooru:
+    build:
+      context: .
+    environment:
+      - MB_DATABASE_URL=postgres://moebooru:moebooru@postgres:5432/moebooru
+      - MB_MEMCACHE_SERVERS=memcached:11211
+    ports:
+      - 8080:8080
+    networks:
+      - default
+      - backend
+    volumes:
+      - /docker/moebooru/data:/moebooru
+    depends_on:
+      - postgres
+      - memcached
+  postgres:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_USER=moebooru
+      - POSTGRES_PASSWORD=moebooru
+    volumes:
+      - /docker/szurubooru/database:/var/lib/postgresql/data
+    networks:
+      - backend
+  memcached:
+    image: memcached:1.5-alpine
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+    internal: True
